@@ -9,6 +9,30 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Open to work banner */
+    .otw-banner {
+      background: var(--green-light);
+      border-bottom: 1px solid #bbf7d0;
+      padding: 0.65rem 0;
+      font-size: 0.875rem;
+      color: var(--green);
+      font-weight: 500;
+    }
+    .otw-banner a {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .otw-banner a:hover { opacity: 0.8; }
+
+    @media (prefers-color-scheme: dark) {
+      .otw-banner {
+        background: var(--green-light);
+        border-bottom-color: #14532d;
+      }
+    }
+
     :root {
       --bg: #ffffff;
       --bg-off: #f8f8f6;
@@ -309,9 +333,56 @@
       .math-equation { gap: 0.5rem; }
       .math-num { font-size: 1.75rem; }
     }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111111;
+        --bg-off: #1c1c1c;
+        --border: #2e2e2e;
+        --text: #ebebeb;
+        --text-muted: #888888;
+        --accent: #e84444;
+        --accent-light: #2a0f0f;
+        --green: #4ade80;
+        --green-light: #052e16;
+        --yellow: #facc15;
+        --yellow-light: #1c1500;
+      }
+
+      /* Elements with hardcoded color: #fff need explicit dark-mode treatment */
+      .share-btn, .btn-primary {
+        background: #ebebeb;
+        color: #111111;
+      }
+
+      .point-num {
+        background: #ebebeb;
+        color: #111111;
+      }
+
+      .toast {
+        background: #ebebeb;
+        color: #111111;
+      }
+
+      /* Rule box stays high-contrast but inverted */
+      .rule-box {
+        background: #f0f0f0;
+        color: #111111;
+      }
+      .rule-box p {
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
   </style>
 </head>
 <body>
+
+  <div class="otw-banner">
+    <div class="container">
+      Looking for someone punctual? I'm open to work. <a href="https://ca.linkedin.com/in/gwhsmith" target="_blank" rel="noopener">View my LinkedIn</a>.
+    </div>
+  </div>
 
   <header>
     <div class="container">
@@ -325,33 +396,33 @@
 
       <section class="hero">
         <div class="hero-label">A note for your next meeting</div>
-        <h1>Stop waiting<br>for <em>late people.</em></h1>
+        <h1 id="headline"></h1>
         <p class="hero-sub">
-          Every minute you hold the meeting for stragglers, you punish the people who showed up on time — and teach everyone else that being late is fine.
+          Every minute you hold the meeting for stragglers, you punish the people who showed up on time. And you teach everyone else that being late is fine.
         </p>
       </section>
 
       <div class="math-box">
-        <div class="math-box-label">The math is simple</div>
+        <div class="math-box-label">Do the math</div>
         <div class="math-equation">
           <div class="math-term">
-            <div class="math-num">10</div>
+            <div class="math-num">6</div>
             <div class="math-desc">people in the meeting</div>
           </div>
           <div class="math-op">×</div>
           <div class="math-term">
             <div class="math-num">5</div>
-            <div class="math-desc">minutes waited</div>
+            <div class="math-desc">minutes you waited</div>
           </div>
           <div class="math-op">=</div>
           <div class="math-term math-result">
-            <div class="math-num">50</div>
-            <div class="math-desc">minutes wasted — for what?</div>
+            <div class="math-num">30</div>
+            <div class="math-desc">minutes gone. For what?</div>
           </div>
         </div>
         <p class="math-note">
-          You burned <strong>nearly an hour of collective time</strong> to spare one person a mildly awkward entrance.
-          That one person will be late again next week.
+          <strong>Half an hour of people's time</strong>, just so one person didn't have to feel awkward walking in late.
+          They'll do it again next week.
         </p>
       </div>
 
@@ -359,12 +430,12 @@
         <div class="point">
           <div class="point-num">1</div>
           <div>
-            <h3>Waiting rewards the wrong behavior</h3>
+            <h3>Waiting makes lateness the smart move</h3>
             <p>
-              If the meeting starts on time whether you're there or not, being late has a cost: you miss things.
-              If the meeting waits for you, being late has no cost at all — in fact, it's
-              <span class="chip chip-red">efficient</span> to show up late and skip the dead air.
-              You've accidentally made punctuality the bad strategy.
+              If the meeting starts without you, showing up late costs you something: you miss the beginning.
+              But if everyone just… waits? Then being late is actually
+              <span class="chip chip-red">more efficient</span>. You skip the awkward small talk and arrive right when things get going.
+              You didn't mean to, but you made punctuality the bad strategy.
             </p>
           </div>
         </div>
@@ -372,12 +443,11 @@
         <div class="point">
           <div class="point-num">2</div>
           <div>
-            <h3>It punishes everyone who showed up</h3>
+            <h3>The people who showed up on time did nothing wrong</h3>
             <p>
-              The people sitting there staring at a loading spinner did nothing wrong.
-              They planned ahead, they carved out the time, they're ready to go.
-              Holding them hostage to accommodate someone else's schedule signals that
-              <span class="chip chip-red">their time matters less</span> than the latecomer's comfort.
+              They blocked their calendar. They showed up. They're sitting there ready to go.
+              Making them wait to protect someone else's comfort tells them
+              <span class="chip chip-red">their time matters less</span>. That's not a great message to send.
             </p>
           </div>
         </div>
@@ -385,13 +455,13 @@
         <div class="point">
           <div class="point-num">3</div>
           <div>
-            <h3>Starting on time is the norm that fixes itself</h3>
+            <h3>It only takes a few meetings to fix</h3>
             <p>
-              The first meeting you start exactly on time will feel rude.
-              The second one, people will notice.
-              By the third, everyone shows up on time — because the meeting
-              <span class="chip chip-green">actually starts</span> when it says it does.
-              Late arrivals catch up. The culture corrects itself.
+              The first time you start on time, it might feel abrupt.
+              By the second or third, people start to notice the pattern.
+              Pretty soon everyone's on early, because they know the meeting
+              <span class="chip chip-green">actually starts</span> when it's supposed to.
+              The culture sorts itself out.
             </p>
           </div>
         </div>
@@ -400,16 +470,16 @@
       <section class="rule-section">
         <div class="rule-label">The rule</div>
         <div class="rule-box">
-          <h2>Start the meeting at the scheduled time. Every time.</h2>
+          <h2>Start at the time on the calendar. Every time.</h2>
           <p>
-            Not "once most people are on." Not "let's give it two more minutes." At the time on the calendar.
-            Latecomers are welcome to join — you keep going. No recap. No pause. The meeting started when it was supposed to.
+            Not "once most people are on." Not "let's give it two more minutes." Right on time.
+            If someone joins late, great. Keep going. No recap, no pause. They'll catch up.
           </p>
         </div>
       </section>
 
       <section class="cta-section">
-        <p>Know someone who needs to read this?</p>
+        <p>Know someone who needs to hear this?</p>
         <div class="cta-row">
           <button class="btn-primary" onclick="copyLink()">Copy link to this page</button>
           <span class="url-chip">dontwait.fyi</span>
@@ -421,13 +491,27 @@
 
   <footer>
     <div class="container">
-      <p>In the tradition of <a href="https://nohello.net" style="color:inherit">nohello.net</a> and <a href="https://noagendameeting.com" style="color:inherit">noagendameeting.com</a> — one-pagers for things that shouldn't need explaining.</p>
+      <p>In the tradition of <a href="https://nohello.net" style="color:inherit">nohello.net</a> and <a href="https://noagendameeting.com" style="color:inherit">noagendameeting.com</a>. One-pagers for things that shouldn't need explaining.</p>
     </div>
   </footer>
 
   <div class="toast" id="toast">Link copied!</div>
 
   <script>
+    const headlines = [
+      'Stop waiting<br>for <em>late people.</em>',
+      'Start the meeting.<br><em>They know the time.</em>',
+      'Their lateness<br>is not your <em>emergency.</em>',
+      'On time means<br><em>on time.</em>',
+      'You already waited.<br><em>Start anyway.</em>',
+      'Late again?<br><em>We noticed.</em>',
+      'The meeting starts<br>when it <em>says it does.</em>',
+      'Respect the people<br>who <em>showed up.</em>',
+    ];
+
+    document.getElementById('headline').innerHTML =
+      headlines[Math.floor(Math.random() * headlines.length)];
+
     function copyLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         const toast = document.getElementById('toast');
