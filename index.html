@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Don't Wait For Late People</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-off: #f8f8f6;
+      --border: #e2e2dc;
+      --text: #111111;
+      --text-muted: #666666;
+      --accent: #e84444;
+      --accent-light: #fff1f1;
+      --green: #16a34a;
+      --green-light: #f0fdf4;
+      --yellow: #854d0e;
+      --yellow-light: #fefce8;
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-id {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .share-btn {
+      background: var(--text);
+      color: #fff;
+      border: none;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: opacity 0.15s;
+    }
+    .share-btn:hover { opacity: 0.8; }
+
+    /* Hero */
+    .hero {
+      padding: 5rem 0 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-size: clamp(2.75rem, 8vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    /* Math callout */
+    .math-box {
+      margin: 3rem 0;
+      background: var(--bg-off);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 2.25rem;
+    }
+    .math-box-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+    .math-equation {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .math-term {
+      text-align: center;
+    }
+    .math-num {
+      font-size: 2.25rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .math-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    .math-op {
+      font-size: 1.75rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+    .math-result .math-num {
+      color: var(--accent);
+    }
+    .math-note {
+      margin-top: 1.25rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+    .math-note strong { color: var(--text); }
+
+    /* Points */
+    .points {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .point {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    .point-num {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--text);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+    .point h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.375rem;
+    }
+    .point p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Callout chips */
+    .chip {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .chip-red { background: var(--accent-light); color: var(--accent); }
+    .chip-green { background: var(--green-light); color: var(--green); }
+
+    /* The Rule */
+    .rule-section {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rule-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .rule-box {
+      background: var(--text);
+      color: #fff;
+      border-radius: 12px;
+      padding: 2rem 2.25rem;
+    }
+    .rule-box h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    .rule-box p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+    }
+
+    /* CTA */
+    .cta-section {
+      padding: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .cta-section p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .cta-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-primary {
+      background: var(--text);
+      color: #fff;
+      border: none;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.8; }
+    .url-chip {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: var(--bg-off);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+    footer p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--text);
+      color: #fff;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: transform 0.25s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 480px) {
+      .hero { padding: 3rem 0 2.5rem; }
+      .math-equation { gap: 0.5rem; }
+      .math-num { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <span class="site-id">dontwait.fyi</span>
+      <button class="share-btn" onclick="copyLink()">Copy link</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <section class="hero">
+        <div class="hero-label">A note for your next meeting</div>
+        <h1>Stop waiting<br>for <em>late people.</em></h1>
+        <p class="hero-sub">
+          Every minute you hold the meeting for stragglers, you punish the people who showed up on time — and teach everyone else that being late is fine.
+        </p>
+      </section>
+
+      <div class="math-box">
+        <div class="math-box-label">The math is simple</div>
+        <div class="math-equation">
+          <div class="math-term">
+            <div class="math-num">10</div>
+            <div class="math-desc">people in the meeting</div>
+          </div>
+          <div class="math-op">×</div>
+          <div class="math-term">
+            <div class="math-num">5</div>
+            <div class="math-desc">minutes waited</div>
+          </div>
+          <div class="math-op">=</div>
+          <div class="math-term math-result">
+            <div class="math-num">50</div>
+            <div class="math-desc">minutes wasted — for what?</div>
+          </div>
+        </div>
+        <p class="math-note">
+          You burned <strong>nearly an hour of collective time</strong> to spare one person a mildly awkward entrance.
+          That one person will be late again next week.
+        </p>
+      </div>
+
+      <section class="points">
+        <div class="point">
+          <div class="point-num">1</div>
+          <div>
+            <h3>Waiting rewards the wrong behavior</h3>
+            <p>
+              If the meeting starts on time whether you're there or not, being late has a cost: you miss things.
+              If the meeting waits for you, being late has no cost at all — in fact, it's
+              <span class="chip chip-red">efficient</span> to show up late and skip the dead air.
+              You've accidentally made punctuality the bad strategy.
+            </p>
+          </div>
+        </div>
+
+        <div class="point">
+          <div class="point-num">2</div>
+          <div>
+            <h3>It punishes everyone who showed up</h3>
+            <p>
+              The people sitting there staring at a loading spinner did nothing wrong.
+              They planned ahead, they carved out the time, they're ready to go.
+              Holding them hostage to accommodate someone else's schedule signals that
+              <span class="chip chip-red">their time matters less</span> than the latecomer's comfort.
+            </p>
+          </div>
+        </div>
+
+        <div class="point">
+          <div class="point-num">3</div>
+          <div>
+            <h3>Starting on time is the norm that fixes itself</h3>
+            <p>
+              The first meeting you start exactly on time will feel rude.
+              The second one, people will notice.
+              By the third, everyone shows up on time — because the meeting
+              <span class="chip chip-green">actually starts</span> when it says it does.
+              Late arrivals catch up. The culture corrects itself.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="rule-section">
+        <div class="rule-label">The rule</div>
+        <div class="rule-box">
+          <h2>Start the meeting at the scheduled time. Every time.</h2>
+          <p>
+            Not "once most people are on." Not "let's give it two more minutes." At the time on the calendar.
+            Latecomers are welcome to join — you keep going. No recap. No pause. The meeting started when it was supposed to.
+          </p>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <p>Know someone who needs to read this?</p>
+        <div class="cta-row">
+          <button class="btn-primary" onclick="copyLink()">Copy link to this page</button>
+          <span class="url-chip">dontwait.fyi</span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>In the tradition of <a href="https://nohello.net" style="color:inherit">nohello.net</a> and <a href="https://noagendameeting.com" style="color:inherit">noagendameeting.com</a> — one-pagers for things that shouldn't need explaining.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">Link copied!</div>
+
+  <script>
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      });
+    }
+  </script>
+
+</body>
+</html>
