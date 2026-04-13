@@ -4,6 +4,8 @@
 
 A one-pager for sending to people who hold meetings for late arrivals.
 
+_Disclaimer: All good-natured grumbles. Garrett is actually a delight._
+
 Inspired by [nohello.net](https://nohello.net) and [noagendameeting.com](https://noagendameeting.com) — one-pagers for things that shouldn't need explaining.
 
 <a href="https://ko-fi.com/X8X61XQPH0" target="_blank"><img height="36" style="border:0px;height:36px;" src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" border="0" alt="Buy Me a Coffee at ko-fi.com" /></a>
