@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=index.html">
+  <title>Redirecting…</title>
+  <script>
+    // UTM map — key is the src param, value is the utm_source
+    const utmMap = {
+      twitter:   'twitter',
+      linkedin:  'linkedin',
+      reddit:    'reddit',
+      hn:        'hackernews',
+      fb:        'facebook',
+      masto:     'mastodon',
+      email:     'email',
+      slack:     'slack',
+      whatsapp:  'whatsapp',
+      default:   'direct'
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const src = params.get('src') || 'default';
+    const utmSource = utmMap[src] || src;
+
+    const base = 'index.html';
+    const url = base + '?utm_source=' + encodeURIComponent(utmSource)
+              + '&utm_medium=' + encodeURIComponent(params.get('medium') || 'share_link')
+              + '&utm_campaign=' + encodeURIComponent(params.get('campaign') || 'dontwait');
+
+    // Also log to console for easy analytics checking
+    console.log('[dontwait.fyi] redirect:', {
+      src,
+      finalUrl: url,
+      referrer: document.referrer
+    });
+
+    window.location.replace(url);
+  </script>
+</head>
+<body>
+  Redirecting to <a id="dest">dontwait.fyi</a>…
+</body>
+</html>

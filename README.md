@@ -26,6 +26,25 @@ open index.html
 
 Push to the `main` branch. GitHub Pages serves `index.html` automatically.
 
+## UTM Tracking
+
+Share links use `r.html` as a redirect to add UTM params. Supported `src` values:
+
+| src param | utm_source | Use when sharing via |
+|-----------|------------|----------------------|
+| `clipboard` | clipboard | Copy button on the page |
+| `linkedin` | linkedin | LinkedIn |
+| `twitter` | twitter | Twitter / X |
+| `reddit` | reddit | Reddit |
+| `hn` | hackernews | Hacker News |
+| `mastodon` | mastodon | Mastodon |
+| `slack` | slack | Slack |
+| `whatsapp` | whatsapp | WhatsApp |
+| `email` | email | Email |
+| `default` | default | Fallback |
+
+To add a new source: edit `r.html` and add to the `utmMap` object.
+
 ```
 git add index.html
 git commit -m "your message"

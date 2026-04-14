@@ -520,7 +520,11 @@
       headlines[Math.floor(Math.random() * headlines.length)];
 
     function copyLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
+      // Use tracked redirect URL — update utmMap in r.html to add new sources
+      var base = window.location.hostname === 'localhost'
+        ? 'http://localhost:3000/r.html'
+        : window.location.protocol + '//dontwait.fyi/r.html';
+      navigator.clipboard.writeText(base + '?src=clipboard').then(() => {
         const toast = document.getElementById('toast');
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2500);
